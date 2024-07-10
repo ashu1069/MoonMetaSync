@@ -1,0 +1,177 @@
+accelerate==0.30.1
+ace==0.3.3
+aiohttp==3.9.3
+aiosignal==1.3.1
+altair==5.2.0
+annotated-types==0.6.0
+anyio==4.2.0
+asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
+attrs==23.2.0
+blinker==1.7.0
+blis==0.7.11
+cachetools==5.3.2
+catalogue==2.0.10
+causal-learn==0.1.3.8
+certifi==2024.2.2
+charset-normalizer==3.3.2
+clarabel==0.9.0
+click==8.1.7
+cloudpathlib==0.16.0
+cloudpickle==3.0.0
+colorama @ file:///C:/ci_311/colorama_1676422310965/work
+comm @ file:///C:/ci_311/comm_1678376562840/work
+confection==0.1.4
+contourpy==1.2.1
+cramjam==2.8.3
+cvxpy==1.5.1
+cycler==0.12.1
+cymem==2.0.8
+Cython==3.0.10
+dataclasses-json==0.6.4
+datasets==2.19.1
+debugpy @ file:///C:/b/abs_c0y1fjipt2/croot/debugpy_1690906864587/work
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+dill==0.3.8
+diskcache==5.6.3
+dowhy==0.11.1
+ecos==2.0.13
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl#sha256=86cc141f63942d4b2c5fcee06630fd6f904788d2f0ab005cce45aadb8fb73889
+evaluate==0.4.2
+executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+faiss-cpu==1.7.4
+fastparquet==2024.5.0
+filelock==3.13.1
+fonttools==4.53.0
+frozenlist==1.4.1
+fsspec==2023.12.2
+fuzzywuzzy==0.18.0
+gitdb==4.0.11
+GitPython==3.1.41
+graphviz==0.20.3
+greenlet==3.0.3
+gym==0.26.2
+gym-notices==0.0.8
+huggingface-hub==0.23.0
+idna==3.6
+importlib-metadata==7.0.1
+ipykernel @ file:///C:/b/abs_c2u94kxcy6/croot/ipykernel_1705933907920/work
+ipython @ file:///C:/b/abs_b6pfgmrqnd/croot/ipython_1704833422163/work
+jedi @ file:///C:/ci_311/jedi_1679427407646/work
+Jinja2==3.1.3
+joblib==1.3.2
+jsonpatch==1.33
+jsonpointer==2.4
+jsonschema==4.21.1
+jsonschema-specifications==2023.12.1
+jupyter_client @ file:///C:/b/abs_a6h3c8hfdq/croot/jupyter_client_1699455939372/work
+jupyter_core @ file:///C:/b/abs_c769pbqg9b/croot/jupyter_core_1698937367513/work
+kiwisolver==1.4.5
+langchain==0.1.5
+langchain-community==0.0.17
+langchain-core==0.1.18
+langcodes==3.4.0
+langsmith==0.0.86
+language_data==1.2.0
+Levenshtein==0.25.1
+llama_cpp_python==0.2.38
+lxml==5.2.2
+marisa-trie==1.1.1
+markdown-it-py==3.0.0
+MarkupSafe==2.1.4
+marshmallow==3.20.2
+matplotlib==3.9.0
+matplotlib-inline @ file:///C:/ci_311/matplotlib-inline_1676425798036/work
+mdurl==0.1.2
+mpmath==1.3.0
+multidict==6.0.5
+multiprocess==0.70.16
+murmurhash==1.0.10
+mypy-extensions==1.0.0
+nest-asyncio @ file:///C:/ci_311/nest-asyncio_1676423519896/work
+networkx==3.2.1
+nltk==3.8.1
+numpy==1.26.3
+opencv-python==4.10.0.84
+osqp==0.6.7
+packaging @ file:///C:/b/abs_28t5mcoltc/croot/packaging_1693575224052/work
+pandas==2.2.0
+parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
+patsy==0.5.6
+pillow==10.2.0
+platformdirs @ file:///C:/b/abs_b6z_yqw_ii/croot/platformdirs_1692205479426/work
+portalocker==2.10.0
+preshed==3.0.9
+prompt-toolkit @ file:///C:/b/abs_68uwr58ed1/croot/prompt-toolkit_1704404394082/work
+protobuf==4.25.2
+psutil @ file:///C:/ci_311_rebuilds/psutil_1679005906571/work
+PuLP==2.8.0
+pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
+pyarrow==15.0.0
+pyarrow-hotfix==0.6
+pydantic==2.6.0
+pydantic_core==2.16.1
+pydeck==0.8.1b0
+pydot==2.0.0
+Pygments @ file:///C:/b/abs_fay9dpq4n_/croot/pygments_1684279990574/work
+PyMuPDF==1.24.2
+PyMuPDFb==1.24.1
+pyparsing==3.1.2
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+python-Levenshtein==0.25.1
+pytz==2024.1
+pywin32==305.1
+PyYAML==6.0.1
+pyzmq @ file:///C:/b/abs_89aq69t0up/croot/pyzmq_1705605705281/work
+qdldl==0.1.7.post2
+rapidfuzz==3.9.0
+referencing==0.33.0
+regex==2023.12.25
+requests==2.31.0
+rich==13.7.0
+rpds-py==0.17.1
+sacrebleu==2.4.2
+safetensors==0.4.2
+scikit-learn==1.4.0
+scipy==1.13.1
+scs==3.2.4.post2
+sentence-transformers==2.3.1
+sentencepiece==0.1.99
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+smart-open==6.4.0
+smmap==5.0.1
+sniffio==1.3.0
+spacy==3.7.4
+spacy-legacy==3.0.12
+spacy-loggers==1.0.5
+SQLAlchemy==2.0.25
+srsly==2.4.8
+stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+statsmodels==0.14.2
+streamlit==1.30.0
+sympy==1.12
+tabulate==0.9.0
+tenacity==8.2.3
+thinc==8.2.3
+threadpoolctl==3.2.0
+tokenizers==0.15.1
+toml==0.10.2
+toolz==0.12.1
+torch==2.2.0
+tornado @ file:///C:/b/abs_0cbrstidzg/croot/tornado_1696937003724/work
+tqdm==4.66.1
+traitlets @ file:///C:/ci_311/traitlets_1676423290727/work
+transformers==4.37.2
+typer==0.9.4
+typing-inspect==0.9.0
+typing_extensions==4.9.0
+tzdata==2023.4
+tzlocal==5.2
+urllib3==2.2.0
+validators==0.22.0
+wasabi==1.1.2
+watchdog==3.0.0
+wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+weasel==0.3.4
+xxhash==3.4.1
+yarl==1.9.4
+zipp==3.17.0
