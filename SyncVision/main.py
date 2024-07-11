@@ -1,11 +1,7 @@
 import argparse
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import cv2
-from PIL import Image
-import math
-from sklearn.decomposition import PCA
 from .metrics import Metrics
 from .registration import registration_sift, registration_orb, registration_intfeat
 
@@ -31,16 +27,17 @@ def resize_images(image1_gray_arr, image2_gray_arr):
     return resized_image2_linear, resized_image2_cubic
 
 def compute_metrics(image1_gray_arr, image2_arr, method):
-    psnr_score = Metrics.psnr(image1_gray_arr, image2_arr)
-    ssim_score = Metrics.ssim(image1_gray_arr, image2_arr)
+    metrics = Metrics(image1_gray_arr, image2_arr)
+    psnr_score = metrics.psnr()
+    ssim_score = metrics.ssim()
     print(f'PSNR score of images by {method} interpolation:', psnr_score)
     print(f'SSIM score of images by {method} interpolation:', ssim_score)
-    return psnr_score, ssim_score
 
 def register_and_compute_metrics(image1_gray_arr, image2_arr, registration_method, method_name):
     result = registration_method(image1_gray_arr, image2_arr)
-    psnr_score = Metrics.psnr(image1_gray_arr, result)
-    ssim_score = Metrics.ssim(image1_gray_arr, result)
+    metrics = Metrics(image1_gray_arr, result)
+    psnr_score = metrics.psnr()
+    ssim_score = metrics.ssim()
     print(f'PSNR score of images by {method_name} interpolation:', psnr_score)
     print(f'SSIM score of images by {method_name} interpolation:', ssim_score)
     return psnr_score, ssim_score

@@ -8,17 +8,17 @@ class IntFeat():
         self.img1 = img1
         self.img2 = img2
 
-    def keypoints_descriptors_sift(self, img1, img2):
+    def keypoints_descriptors_sift(self):
         sift = cv2.SIFT_create()
-        keypoints_img1_sift, descriptors_img1_sift = sift.detectAndCompute(img1, None)
-        keypoints_img2_sift, descriptors_img2_sift = sift.detectAndCompute(img2, None)
+        keypoints_img1_sift, descriptors_img1_sift = sift.detectAndCompute(self.img1, None)
+        keypoints_img2_sift, descriptors_img2_sift = sift.detectAndCompute(self.img2, None)
 
         return keypoints_img1_sift, keypoints_img2_sift, descriptors_img1_sift, descriptors_img2_sift
     
-    def keypoints_descriptors_orb(self, img1, img2):
+    def keypoints_descriptors_orb(self):
         orb = cv2.ORB_create()
-        keypoints_img1_orb, descriptors_img1_orb = orb.detectAndCompute(img1, None)
-        keypoints_img2_orb, descriptors_img2_orb = orb.detectAndCompute(img2, None)
+        keypoints_img1_orb, descriptors_img1_orb = orb.detectAndCompute(self.img1, None)
+        keypoints_img2_orb, descriptors_img2_orb = orb.detectAndCompute(self.img2, None)
 
         return keypoints_img1_orb, keypoints_img2_orb, descriptors_img1_orb, descriptors_img2_orb
     
@@ -35,9 +35,9 @@ class IntFeat():
         return combined_descriptors
 
 def registration_intfeat(img1, img2):
-    intfeat = IntFeat()
-    keypoints_img1_sift, keypoints_img2_sift, descriptors_img1_sift, descriptors_img2_sift = intfeat.keypoints_descriptors_sift(img1, img2)
-    keypoints_img1_orb, keypoints_img2_orb, descriptors_img1_orb, descriptors_img2_orb = intfeat.keypoints_descriptors_orb(img1, img2)
+    intfeat = IntFeat(img1, img2)
+    keypoints_img1_sift, keypoints_img2_sift, descriptors_img1_sift, descriptors_img2_sift = intfeat.keypoints_descriptors_sift()
+    keypoints_img1_orb, keypoints_img2_orb, descriptors_img1_orb, descriptors_img2_orb = intfeat.keypoints_descriptors_orb()
 
     keypoints_img1 = keypoints_img1_sift + keypoints_img1_orb
     keypoints_img2 = keypoints_img2_sift + keypoints_img2_orb
