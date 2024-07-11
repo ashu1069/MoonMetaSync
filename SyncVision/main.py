@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,14 +7,14 @@ from PIL import Image
 import math
 from sklearn.decomposition import PCA
 from metrics import Metrics
-from registration import *
+from registration import registration_sift, registration_orb, registration_intfeat
 
 def load_images(hr_path, lr_path):
-    hr_image_arr = cv2.imread(hr_path+'/image_0.png', cv2.IMREAD_COLOR)
+    hr_image_arr = cv2.imread(hr_path, cv2.IMREAD_COLOR)
     print('Shape of high-resolution image:', hr_image_arr.shape)
 
-    lr_image_arr = cv2.imread(lr_path+'/image_0.png', cv2.IMREAD_COLOR)
-    print('Shape of high-resolution image:', lr_image_arr.shape)
+    lr_image_arr = cv2.imread(lr_path, cv2.IMREAD_COLOR)
+    print('Shape of low-resolution image:', lr_image_arr.shape)
 
     return hr_image_arr, lr_image_arr
 
@@ -44,10 +45,7 @@ def register_and_compute_metrics(hr_gray_arr, lr_arr, registration_method, metho
     print(f'SSIM score of TMC2 and OHRC patch by {method_name} interpolation:', ssim_score)
     return psnr_score, ssim_score
 
-def main():
-    hr_path = 'C:/ashu1069/Ashutosh/MoonMetaSync/images_hr'
-    lr_path = 'C:/ashu1069/Ashutosh/MoonMetaSync/images_hr'
-
+def process_images(hr_path, lr_path, method):
     hr_image_arr, lr_image_arr = load_images(hr_path, lr_path)
     hr_gray_arr, lr_gray_arr = convert_to_grayscale(hr_image_arr, lr_image_arr)
     resized_lr_linear, resized_lr_cubic = resize_images(hr_gray_arr, lr_gray_arr)
@@ -56,17 +54,28 @@ def main():
     compute_metrics(hr_gray_arr, resized_lr_linear, "bilinear")
     compute_metrics(hr_gray_arr, resized_lr_cubic, "cubic")
 
-    # Register and compute metrics with SIFT
-    register_and_compute_metrics(hr_gray_arr, resized_lr_linear, registration_sift, "bilinear SIFT")
-    register_and_compute_metrics(hr_gray_arr, resized_lr_cubic, registration_sift, "cubic SIFT")
+    # Choose registration method
+    if method == 'sift':
+        registration_method = registration_sift
+        method_name = "SIFT"
+    elif method == 'orb':
+        registration_method = registration_orb
+        method_name = "ORB"
+    elif method == 'intfeat':
+        registration_method = registration_intfeat
+        method_name = "Intfeat"
+    else:
+        raise ValueError("Invalid registration method. Choose from 'sift', 'orb', or 'intfeat'.")
 
-    # Register and compute metrics with ORB
-    register_and_compute_metrics(hr_gray_arr, resized_lr_linear, registration_orb, "bilinear ORB")
-    register_and_compute_metrics(hr_gray_arr, resized_lr_cubic, registration_orb, "cubic ORB")
-
-    # Register and compute metrics with Intfeat
-    register_and_compute_metrics(hr_gray_arr, resized_lr_linear, registration_intfeat, "bilinear Intfeat")
-    register_and_compute_metrics(hr_gray_arr, resized_lr_cubic, registration_intfeat, "cubic Intfeat")
+    # Register and compute metrics
+    register_and_compute_metrics(hr_gray_arr, resized_lr_linear, registration_method, f"bilinear {method_name}")
+    register_and_compute_metrics(hr_gray_arr, resized_lr_cubic, registration_method, f"cubic {method_name}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Process high and low resolution images with specified registration method.")
+    parser.add_argument("hr_path", type=str, help="Path to the high-resolution image")
+    parser.add_argument("lr_path", type=str, help="Path to the low-resolution image")
+    parser.add_argument("method", type=str, choices=['sift', 'orb', 'intfeat'], help="Registration method to use")
+
+    args = parser.parse_args()
+    process_images(args.hr_path, args.lr_path, args.method)
