@@ -1,5 +1,5 @@
 import unittest
-from IntFeat import main
+from SyncVision import main
 
 class TestMain(unittest.TestCase):
     def test_example(self):
