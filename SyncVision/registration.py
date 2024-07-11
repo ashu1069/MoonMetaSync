@@ -53,6 +53,9 @@ def registration_intfeat(img1, img2):
         if m.distance < 0.7 * n.distance:
             good_matches.append(m)
 
+    if len(good_matches) < 4:
+        raise ValueError("Not enough matches found to compute homography. Found only {} matches.".format(len(good_matches)))
+
     result = cv2.drawMatches(img1, keypoints_img1, img2, keypoints_img2, good_matches, None)
 
     plt.imshow(result)
@@ -96,6 +99,9 @@ def registration_sift(img1, img2):
     for m, n in matches:
         if m.distance < 0.7 * n.distance:
             good_matches.append(m)
+
+    if len(good_matches) < 4:
+        raise ValueError("Not enough matches found to compute homography. Found only {} matches.".format(len(good_matches)))
     
     # draw the matches between keypoints of both images
     result = cv2.drawMatches(img1, keypoints_img1, img2, keypoints_img2, good_matches, None)
@@ -146,6 +152,9 @@ def registration_orb(img1, img2):
     for m, n in matches:
         if m.distance < 0.7 * n.distance:
             good_matches.append(m)
+
+    if len(good_matches) < 4:
+        raise ValueError("Not enough matches found to compute homography. Found only {} matches.".format(len(good_matches)))
     
     # draw the matches between keypoints of both images
     result = cv2.drawMatches(img1, keypoints_img1, img2, keypoints_img2, good_matches, None)

@@ -19,6 +19,11 @@ def convert_to_grayscale(image1_arr, image2_arr):
     image2_gray_arr = cv2.cvtColor(image2_arr, cv2.COLOR_BGR2GRAY)
     return image1_gray_arr, image2_gray_arr
 
+def resize_to_match(image1_arr, image2_arr):
+    height, width = image1_arr.shape
+    image2_resized = cv2.resize(image2_arr, (width, height), interpolation=cv2.INTER_LINEAR)
+    return image2_resized
+
 def resize_images(image1_gray_arr, image2_gray_arr):
     width, height = image1_gray_arr.shape
     dim = (width, height)
@@ -34,13 +39,18 @@ def compute_metrics(image1_gray_arr, image2_arr, method):
     print(f'SSIM score of images by {method} interpolation:', ssim_score)
 
 def register_and_compute_metrics(image1_gray_arr, image2_arr, registration_method, method_name):
-    result = registration_method(image1_gray_arr, image2_arr)
-    metrics = Metrics(image1_gray_arr, result)
-    psnr_score = metrics.psnr()
-    ssim_score = metrics.ssim()
-    print(f'PSNR score of images by {method_name} interpolation:', psnr_score)
-    print(f'SSIM score of images by {method_name} interpolation:', ssim_score)
-    return psnr_score, ssim_score
+    try:
+        result = registration_method(image1_gray_arr, image2_arr)
+        result_resized = resize_to_match(image1_gray_arr, result)
+        metrics = Metrics(image1_gray_arr, result_resized)
+        psnr_score = metrics.psnr()
+        ssim_score = metrics.ssim()
+        print(f'PSNR score of images by {method_name} interpolation:', psnr_score)
+        print(f'SSIM score of images by {method_name} interpolation:', ssim_score)
+        return psnr_score, ssim_score
+    except ValueError as e:
+        print(f"Error in {method_name} registration: {e}")
+        return None, None
 
 def process_images(image1_path, image2_path, method):
     image1_arr, image2_arr = load_images(image1_path, image2_path)
