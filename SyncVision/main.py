@@ -38,9 +38,9 @@ def compute_metrics(image1_gray_arr, image2_arr, method):
     print(f'PSNR score of images by {method} interpolation:', psnr_score)
     print(f'SSIM score of images by {method} interpolation:', ssim_score)
 
-def register_and_compute_metrics(image1_gray_arr, image2_arr, registration_method, method_name):
+def register_and_compute_metrics(image1_gray_arr, image2_arr, registration_method, method_name, thresh):
     try:
-        result = registration_method(image1_gray_arr, image2_arr)
+        result = registration_method(image1_gray_arr, image2_arr, thresh)
         result_resized = resize_to_match(image1_gray_arr, result)
         metrics = Metrics(image1_gray_arr, result_resized)
         psnr_score = metrics.psnr()
@@ -52,7 +52,7 @@ def register_and_compute_metrics(image1_gray_arr, image2_arr, registration_metho
         print(f"Error in {method_name} registration: {e}")
         return None, None
 
-def process_images(image1_path, image2_path, method):
+def process_images(image1_path, image2_path, method, match_thresh):
     image1_arr, image2_arr = load_images(image1_path, image2_path)
     image1_gray_arr, image2_gray_arr = convert_to_grayscale(image1_arr, image2_arr)
     resized_image2_linear, resized_image2_cubic = resize_images(image1_gray_arr, image2_gray_arr)
@@ -75,14 +75,17 @@ def process_images(image1_path, image2_path, method):
         raise ValueError("Invalid registration method. Choose from 'sift', 'orb', or 'intfeat'.")
 
     # Register and compute metrics
-    register_and_compute_metrics(image1_gray_arr, resized_image2_linear, registration_method, f"bilinear {method_name}")
-    register_and_compute_metrics(image1_gray_arr, resized_image2_cubic, registration_method, f"cubic {method_name}")
+    register_and_compute_metrics(image1_gray_arr, resized_image2_linear, registration_method, f"bilinear {method_name}", match_thresh)
+    register_and_compute_metrics(image1_gray_arr, resized_image2_cubic, registration_method, f"cubic {method_name}", match_thresh)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process two images with specified registration method.")
     parser.add_argument("image1_path", type=str, help="Path to the first image")
     parser.add_argument("image2_path", type=str, help="Path to the second image")
     parser.add_argument("method", type=str, choices=['sift', 'orb', 'intfeat'], help="Registration method to use")
+    parser.add_argument("match_thresh", type=float, help="Threshold for good matches between 0&1", default=0.7)
+    
+    
 
     args = parser.parse_args()
-    process_images(args.image1_path, args.image2_path, args.method)
+    process_images(args.image1_path, args.image2_path, args.method, args.match_thresh)

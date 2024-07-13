@@ -34,7 +34,7 @@ class IntFeat():
         combined_descriptors = np.vstack((descriptors_sift_reduced, descriptors_orb))
         return combined_descriptors
 
-def registration_intfeat(img1, img2):
+def registration_intfeat(img1, img2, match_thresh=0.7):
     intfeat = IntFeat(img1, img2)
     keypoints_img1_sift, keypoints_img2_sift, descriptors_img1_sift, descriptors_img2_sift = intfeat.keypoints_descriptors_sift()
     keypoints_img1_orb, keypoints_img2_orb, descriptors_img1_orb, descriptors_img2_orb = intfeat.keypoints_descriptors_orb()
@@ -50,7 +50,7 @@ def registration_intfeat(img1, img2):
 
     good_matches = []
     for m, n in matches:
-        if m.distance < 0.7 * n.distance:
+        if m.distance < match_thresh * n.distance:
             good_matches.append(m)
 
     if len(good_matches) < 4:
@@ -70,7 +70,7 @@ def registration_intfeat(img1, img2):
     return result_intfeat 
 
 
-def registration_sift(img1, img2):
+def registration_sift(img1, img2, match_thresh=0.7):
     '''
     This function takes two images and register them to a single coordinate system using SIFT as a feature detector
     
@@ -97,7 +97,7 @@ def registration_sift(img1, img2):
     # filtering good matches using 0.7 as threshold distance values
     good_matches = []
     for m, n in matches:
-        if m.distance < 0.7 * n.distance:
+        if m.distance < match_thresh * n.distance:
             good_matches.append(m)
 
     if len(good_matches) < 4:
@@ -123,7 +123,7 @@ def registration_sift(img1, img2):
     
     return registered_img
 
-def registration_orb(img1, img2):
+def registration_orb(img1, img2, match_thresh=0.7):
     '''
     This function takes two images and register them to a single coordinate system using ORB as a feature detector
     
@@ -150,7 +150,7 @@ def registration_orb(img1, img2):
     # filtering good matches using 0.7 as threshold distance values
     good_matches = []
     for m, n in matches:
-        if m.distance < 0.7 * n.distance:
+        if m.distance < match_thresh * n.distance:
             good_matches.append(m)
 
     if len(good_matches) < 4:
